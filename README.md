@@ -1,5 +1,10 @@
 # Presentation
-This repository contains resources derived from and supporting the [European Digital Competence Framework DigComp-3.0](https://joint-research-centre.ec.europa.eu/projects-and-activities/education-and-training/digital-transformation-education/digital-competence-framework-digcomp/digcomp-30_en).
-- Cosgrove, J. and Cachia, R., DigComp 3.0: European Digital Competence Framework - Fifth Edition, Publications Office of the European Union, Luxembourg, 2025, https://data.europa.eu/doi/10.2760/0001149, JRC144121. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0)
-## External resources
+This repository contains resources related to European Commission documents on digital education.
+
+## Guidelines on the ethical use of artificial intelligence and data in teaching and learning (2026)
+- Markdown version of the [Guidelines on the ethical use of artificial intelligence and data in teaching and learning (2026)](https://education.ec.europa.eu/focus-topics/digital-education/action-plan/ethical-guidelines-for-educators-on-using-ai).
+
+## DigComp 3.0
+- [European Digital Competence Framework DigComp-3.0](https://joint-research-centre.ec.europa.eu/projects-and-activities/education-and-training/digital-transformation-education/digital-competence-framework-digcomp/digcomp-30_en).
+### External resources
 - [Digcomp3-l10n Weblate repository](https://github.com/PiAir/digcomp3-l10n)
