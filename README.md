@@ -1,5 +1,5 @@
 # Presentation
-This repository contains resources related to European Commission documents on digital education.
+This repository contains resources related to European Commission documents on digital education (all documents are under CC BY 4.0 licence).
 
 ## European Commission - Guidelines on the ethical use of artificial intelligence and data in teaching and learning (2026)
 - Markdown version of the [Guidelines on the ethical use of artificial intelligence and data in teaching and learning (2026)](https://education.ec.europa.eu/focus-topics/digital-education/action-plan/ethical-guidelines-for-educators-on-using-ai).
