@@ -7,5 +7,5 @@ This repository contains resources (mainly in Markdown format) related to Europe
 ## European Commission - DigCompEdu
 - Key elements of the European Digital Competence Framework for Teachers: areas and proficiency levels.
 ## Varia
-- France, [synthèse sur le cadre d'usage de l'IA](france-cadre-ia.html)
+- France, [synthèse sur le cadre d'usage de l'IA](https://jourde.github.io/digital-education/varia/france-cadre-ia.html) - [DRANE PACA - NICE - 2025](https://www.pedagogie.ac-nice.fr/drane/2025/09/09/cadre-usage-de-lia-en-education-simplifie/)
 ...
