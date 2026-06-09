@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA pour les Enseignants – Guide pratique</title>
+  <style>
+    .ia-guide-container * { margin: 0; padding: 0; box-sizing: border-box; }
+    .ia-guide-container {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+    .ia-guide-container .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .ia-guide-container .header {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    .ia-guide-container .header h1 { font-size: 2.2em; margin-bottom: 10px; font-weight: 700; }
+    .ia-guide-container .header p { font-size: 1.1em; opacity: 0.9; }
+    .ia-guide-container .header a { color: #fff; text-decoration: underline; }
+    .ia-guide-container .content { padding: 30px; }
+    .ia-guide-container .section { margin-bottom: 30px; }
+    .ia-guide-container .section-title {
+      display: flex; align-items: center;
+      margin-bottom: 20px; font-size: 1.5em; font-weight: 600;
+    }
+    .ia-guide-container .section-title.can-do { color: #27ae60; }
+    .ia-guide-container .section-title.cannot-do { color: #e74c3c; }
+    .ia-guide-container .section-title.precautions { color: #f39c12; }
+    .ia-guide-container .icon {
+      width: 30px; height: 30px; margin-right: 15px;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-weight: bold; color: white;
+    }
+    .ia-guide-container .icon.can-do { background: #27ae60; }
+    .ia-guide-container .icon.cannot-do { background: #e74c3c; }
+    .ia-guide-container .icon.precautions { background: #f39c12; }
+    .ia-guide-container .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+    }
+    .ia-guide-container .item {
+      background: #f8f9fa; padding: 20px; border-radius: 12px;
+      border-left: 4px solid; transition: transform 0.2s ease;
+    }
+    .ia-guide-container .item:hover { transform: translateX(5px); }
+    .ia-guide-container .item.can-do {
+      border-left-color: #27ae60;
+      background: linear-gradient(135deg, #e8f5e8 0%, #f4f9f4 100%);
+    }
+    .ia-guide-container .item.cannot-do {
+      border-left-color: #e74c3c;
+      background: linear-gradient(135deg, #fdeaea 0%, #fef4f4 100%);
+    }
+    .ia-guide-container .item.precautions {
+      border-left-color: #f39c12;
+      background: linear-gradient(135deg, #fef9e7 0%, #fffbf0 100%);
+    }
+    .ia-guide-container .item h3 { font-size: 1.1em; margin-bottom: 8px; color: #2c3e50; }
+    .ia-guide-container .item p { font-size: 0.9em; color: #5a6c7d; line-height: 1.4; }
+    .ia-guide-container .important-note {
+      background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+      color: white; padding: 20px; border-radius: 12px;
+      margin-top: 30px; text-align: center;
+    }
+    .ia-guide-container .important-note h3 { font-size: 1.3em; margin-bottom: 10px; }
+    .ia-guide-container .footer {
+      background: #2c3e50; color: white;
+      padding: 20px; text-align: center; font-size: 0.9em;
+    }
+    .ia-guide-container .details-toggle {
+      margin-top: 10px; font-size: 0.85em; color: #3498db;
+      cursor: pointer; display: flex; align-items: center;
+    }
+    .ia-guide-container .details-toggle:hover { text-decoration: underline; }
+    .ia-guide-container .details-toggle::before { content: "📖"; margin-right: 5px; }
+    .ia-guide-container .details-content {
+      padding: 10px; margin-top: 8px;
+      background-color: rgba(255,255,255,0.7);
+      border-radius: 8px; font-size: 0.8em;
+      line-height: 1.4; color: #34495e; display: none;
+    }
+    .ia-guide-container .details-content.show { display: block; }
+    .ia-guide-container .source {
+      font-style: italic; margin-top: 5px;
+      padding: 5px; background-color: rgba(0,0,0,0.05); border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      .ia-guide-container .items-grid { grid-template-columns: 1fr; }
+      .ia-guide-container .header h1 { font-size: 1.8em; }
+      .ia-guide-container .container { margin: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ia-guide-container">
+  <div class="container">
+    <div class="header">
+      <h1>🤖 IA pour les Enseignants</h1>
+      <p>Guide pratique selon les recommandations du Ministère (Cadre d'Usage), de la Direction du Numérique Educatif, de la Direction des Affaires Juridiques et de la CNIL</p>
+      <div style="margin-top: 15px; font-size: 0.9em;">
+        <p><strong>Sources officielles :</strong></p>
+        <p>• <a href="https://www.education.gouv.fr/cadre-d-usage-de-l-ia-en-education-450647" target="_blank" rel="noopener">Cadre d'usage de l'IA en éducation (Ministère)</a></p>
+        <p>• <a href="https://www.cnil.fr/fr/deux-faq-utilisation-des-systemes-dia-scolaire" target="_blank" rel="noopener">FAQ CNIL – Systèmes d'IA scolaire</a></p>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- CE QUE VOUS POUVEZ FAIRE -->
+      <div class="section">
+        <div class="section-title can-do">
+          <div class="icon can-do">✓</div>
+          Ce que vous POUVEZ faire
+        </div>
+        <div class="items-grid">
+
+          <div class="item can-do">
+            <h3>Utiliser l'IA pour vos tâches pédagogiques</h3>
+            <p>Préparation de cours, création d'exercices, aide à la correction, adaptation aux besoins éducatifs particuliers</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Les enseignants peuvent utiliser les outils d'IA pour préparer leurs cours, créer des exercices différenciés ou adapter des supports pédagogiques. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Usages pédagogiques »</p>
+              <p>📌 <strong>CNIL</strong> : « L'utilisation d'outils d'IA par les enseignants pour leurs préparations de cours ne nécessite pas de formalité particulière dès lors qu'aucune donnée personnelle n'est traitée. »</p>
+              <p class="source">Source : FAQ CNIL, question « Quelles utilisations par les enseignants ? »</p>
+            </div>
+          </div>
+
+          <div class="item can-do">
+            <h3>Vous avez une liberté pédagogique</h3>
+            <p>L'enseignant bénéficie d'une liberté de choix dans ses outils pédagogiques (encadrée par le projet d'établissement)</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Dans le cadre de leur liberté pédagogique, les enseignants peuvent choisir d'utiliser des outils numériques incluant des fonctionnalités d'IA, sous réserve du respect du cadre juridique et éthique. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Cadre juridique »</p>
+              <p>📌 <strong>CNIL</strong> : « Le choix des outils pédagogiques relève de la liberté pédagogique des enseignants, sous réserve du respect des règles de protection des données. »</p>
+              <p class="source">Source : FAQ CNIL, question « Qui décide des outils utilisés ? »</p>
+            </div>
+          </div>
+
+          <div class="item can-do">
+            <h3>Utiliser les IA génératives sans compte individuel élève</h3>
+            <p>Privilégier les outils qui ne nécessitent pas de création de compte par l'élève</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Il est recommandé de privilégier les outils ne nécessitant pas de création de compte individuel par les élèves, ou de passer par le GAR lorsque c'est possible. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Recommandations pratiques »</p>
+              <p>📌 <strong>CNIL</strong> : « L'utilisation d'outils ne nécessitant pas de compte individuel est à privilégier pour éviter la collecte inutile de données personnelles. »</p>
+              <p class="source">Source : FAQ CNIL, question « Faut-il créer des comptes élèves ? »</p>
+            </div>
+          </div>
+
+          <div class="item can-do">
+            <h3>Créer un compte « classe » unique</h3>
+            <p>Plutôt qu'un compte par élève, utiliser un compte partagé pour la classe. Attention cependant à ce que les élèves « promptent », aucune donnée personnelle ne doit apparaître</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « En cas de nécessité d'utilisation d'un outil nécessitant un compte, un compte unique pour la classe peut être créé, sous réserve de ne pas y faire figurer de données personnelles. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Gestion des comptes »</p>
+              <p>📌 <strong>CNIL</strong> : « Un compte collectif peut être une solution transitoire, à condition de veiller à ce qu'aucune donnée personnelle ne soit saisie dans les échanges avec l'IA. »</p>
+              <p class="source">Source : FAQ CNIL, question « Comment gérer les comptes ? »</p>
+            </div>
+          </div>
+
+          <div class="item can-do">
+            <h3>Utiliser les ressources du GAR</h3>
+            <p>Privilégier les outils recommandés par le Ministère via le Gestionnaire d'Accès aux Ressources</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Les ressources disponibles via le GAR offrent les garanties nécessaires en matière de protection des données et de conformité avec les programmes. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Ressources recommandées »</p>
+              <p>📌 <strong>CNIL</strong> : « Les ressources accessibles via le GAR sont préférables car elles intègrent déjà les nécessaires garanties de conformité au RGPD. »</p>
+              <p class="source">Source : FAQ CNIL, question « Quels outils privilégier ? »</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CE QUE VOUS NE POUVEZ PAS FAIRE -->
+      <div class="section">
+        <div class="section-title cannot-do">
+          <div class="icon cannot-do">✕</div>
+          Ce que vous NE POUVEZ PAS faire
+        </div>
+        <div class="items-grid">
+
+          <div class="item cannot-do">
+            <h3>Utiliser sans informer la hiérarchie</h3>
+            <p>Vous devez informer le directeur d'école ou le chef d'établissement des outils utilisés. Ce dernier évaluera la compatibilité avec le projet pédagogique et le respect du cadre</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Tout usage d'outils d'IA doit être porté à la connaissance du chef d'établissement ou du directeur d'école qui en évaluera la pertinence pédagogique et la conformité. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Rôle des responsables »</p>
+              <p>📌 <strong>CNIL</strong> : « L'enseignant ne peut pas décider seul d'utiliser un outil traitant des données personnelles sans en informer le responsable de traitement (chef d'établissement ou DASEN). »</p>
+              <p class="source">Source : FAQ CNIL, question « Qui est responsable ? »</p>
+            </div>
+          </div>
+
+          <div class="item cannot-do">
+            <h3>Prendre des décisions pédagogiques automatisées</h3>
+            <p>Vous ne pouvez pas confier à l'IA la tâche d'évaluer, attribuer une note ou donner un travail sans supervision humaine</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « L'évaluation des élèves ne peut en aucun cas être entièrement déléguée à un système d'IA. La décision finale doit toujours revenir à l'enseignant. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Limites d'usage »</p>
+              <p>📌 <strong>CNIL</strong> : « Toute décision individuelle automatisée concernant un élève est interdite sans intervention humaine significative. »</p>
+              <p class="source">Source : FAQ CNIL, question « Évaluation automatisée »</p>
+            </div>
+          </div>
+
+          <div class="item cannot-do">
+            <h3>Utiliser l'IA pour détecter la fraude</h3>
+            <p>Les systèmes d'IA sont insuffisamment fiables pour repérer les contenus générés par IA – déconseillé par le Ministère</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Les outils de détection de production par IA ne présentent pas une fiabilité suffisante et leur usage est déconseillé pour évaluer le travail des élèves. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Limites techniques »</p>
+              <p>📌 <strong>CNIL</strong> : « Les outils de détection de textes générés par IA comportent un taux important de faux positifs et ne doivent pas servir à sanctionner des élèves. »</p>
+              <p class="source">Source : FAQ CNIL, question « Détection de fraude »</p>
+            </div>
+          </div>
+
+          <div class="item cannot-do">
+            <h3>Imposer des comptes individuels</h3>
+            <p>Les outils « grand public » ne doivent pas contraindre les élèves à créer des comptes avec leurs données personnelles</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « La création de comptes individuels pour les élèves sur des plateformes grand public n'est pas autorisée sans accord préalable des responsables légaux. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Protection des mineurs »</p>
+              <p>📌 <strong>CNIL</strong> : « L'obligation pour un élève de créer un compte avec des données personnelles sur une plateforme non souveraine est contraire au principe de minimisation des données. »</p>
+              <p class="source">Source : FAQ CNIL, question « Comptes élèves »</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PRÉCAUTIONS -->
+      <div class="section">
+        <div class="section-title precautions">
+          <div class="icon precautions">⚠</div>
+          Précautions à prendre
+        </div>
+        <div class="items-grid">
+
+          <div class="item precautions">
+            <h3>Informer les familles</h3>
+            <p>Obligation d'informer le chef d'établissement, les élèves et parents si des données sont traitées</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Lorsque des données personnelles sont traitées, les responsables légaux doivent être informés des outils utilisés et de leurs finalités. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Information des familles »</p>
+              <p>📌 <strong>CNIL</strong> : « L'information des personnes concernées (élèves et parents) est une obligation légale dès lors que des données personnelles sont traitées. »</p>
+              <p class="source">Source : FAQ CNIL, question « Information des utilisateurs »</p>
+            </div>
+          </div>
+
+          <div class="item precautions">
+            <h3>Respecter le droit d'opposition</h3>
+            <p>Parents et élèves peuvent s'opposer pour des raisons particulières (sauf si l'outil est indispensable)</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Les familles peuvent exercer leur droit d'opposition à l'utilisation d'outils d'IA traitant des données personnelles, sauf lorsque cet usage est strictement nécessaire à la réalisation des apprentissages. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Droits des personnes »</p>
+              <p>📌 <strong>CNIL</strong> : « Le droit d'opposition peut être exercé sauf lorsque le traitement est nécessaire à l'exécution d'une mission d'intérêt public (comme l'éducation). »</p>
+              <p class="source">Source : FAQ CNIL, question « Droits des élèves »</p>
+            </div>
+          </div>
+
+          <div class="item precautions">
+            <h3>Paramétrer la confidentialité</h3>
+            <p>Désactiver l'historique, la réutilisation des données, le traçage et la géolocalisation lors d'un usage à but pédagogique avec des élèves</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Les paramètres de confidentialité doivent être configurés au maximum, avec désactivation de l'historique et du traçage, lors d'usages pédagogiques. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Paramétrage »</p>
+              <p>📌 <strong>CNIL</strong> : « Toutes les fonctionnalités de collecte de données secondaires (géolocalisation, historique, etc.) doivent être désactivées dans un cadre scolaire. »</p>
+              <p class="source">Source : FAQ CNIL, question « Paramètres de confidentialité »</p>
+            </div>
+          </div>
+
+          <div class="item precautions">
+            <h3>Former et encadrer les élèves</h3>
+            <p>Sensibiliser aux risques, encadrer les prompts, développer l'esprit critique face aux réponses</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « L'usage pédagogique de l'IA doit s'accompagner d'une éducation aux médias et à l'information renforcée, incluant un volet spécifique sur le fonctionnement et les limites de ces outils. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Éducation critique »</p>
+              <p>📌 <strong>CNIL</strong> : « Les élèves doivent être formés à un usage éclairé de l'IA, comprenant la protection des données et l'esprit critique face aux résultats. »</p>
+              <p class="source">Source : FAQ CNIL, question « Formation des élèves »</p>
+            </div>
+          </div>
+
+          <div class="item precautions">
+            <h3>Protéger les données personnelles</h3>
+            <p>Ne jamais saisir de noms, adresses, ou autres informations identifiantes – même un compte « classe » peut traiter des données</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Aucune donnée personnelle (nom, prénom, adresse, etc.) ne doit être saisie dans les outils d'IA, y compris via un compte classe. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Protection des données »</p>
+              <p>📌 <strong>CNIL</strong> : « La saisie de données personnelles dans des outils d'IA expose à des risques de réutilisation non contrôlée et doit être absolument évitée. »</p>
+              <p class="source">Source : FAQ CNIL, question « Données personnelles »</p>
+            </div>
+          </div>
+
+          <div class="item precautions">
+            <h3>Se former à l'utilisation</h3>
+            <p>Acquérir les compétences nécessaires avant utilisation (formations individuelles ou d'établissement, ressources MOOC AI4T, M@gistère, Canopé, CNIL…)</p>
+            <div class="details-toggle" onclick="toggleDetails(this)">Voir les références officielles</div>
+            <div class="details-content">
+              <p>📌 <strong>Ministère de l'Éducation</strong> : « Les enseignants doivent bénéficier de formations spécifiques pour maîtriser les enjeux pédagogiques, éthiques et juridiques liés à l'usage de l'IA. »</p>
+              <p class="source">Source : Cadre d'usage de l'IA en éducation, partie « Formation des enseignants »</p>
+              <p>📌 <strong>CNIL</strong> : « L'utilisation responsable des outils d'IA nécessite une compréhension de leurs fonctionnements et limites, ce qui implique une formation préalable. »</p>
+              <p class="source">Source : FAQ CNIL, question « Compétences nécessaires »</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- POINTS CLÉS -->
+      <div class="important-note">
+        <h3>📋 POINTS CLÉS À RETENIR</h3>
+        <p><strong>Responsabilité :</strong> Le responsable de traitement reste le DASEN (1er degré) ou le chef d'établissement (2nd degré) – pas l'enseignant.</p>
+        <p><strong>IA souveraine :</strong> Le Ministère développe un système d'IA dédiée à l'éducation, opérationnel pour la rentrée 2026-2027.</p>
+        <p><strong>Délégué à la protection des données :</strong> Associez systématiquement le DPO (Délégué à la Protection des Données) de votre académie lors de l'utilisation d'un système d'IA.</p>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <p>Juin 2025</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleDetails(element) {
+  const content = element.nextElementSibling;
+  content.classList.toggle('show');
+  if (content.classList.contains('show')) {
+    element.innerHTML = '📖 Masquer les références';
+  } else {
+    element.innerHTML = '📖 Voir les références officielles';
+  }
+}
+</script>
+
+</body>
+</html>
