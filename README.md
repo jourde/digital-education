@@ -6,5 +6,6 @@ This repository contains resources (mainly in Markdown format) related to Europe
 - See also this external resource: [Digcomp3-l10n Weblate repository](https://github.com/PiAir/digcomp3-l10n) 
 ## European Commission - DigCompEdu
 - Key elements of the European Digital Competence Framework for Teachers: areas and proficiency levels.
-
+## Varia
+- France, [synthèse sur le cadre d'usage de l'IA](france-cadre-ia.html)
 ...
